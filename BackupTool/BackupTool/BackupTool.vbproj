@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackupTool.vb" />
+    <Compile Include="CDirectoryTree.vb" />
     <Compile Include="CLongInteger.vb" />
     <Compile Include="Directory.Designer.vb">
       <DependentUpon>Directory.vb</DependentUpon>
