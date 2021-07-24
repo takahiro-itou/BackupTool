@@ -69,11 +69,16 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.vb">
+    <Compile Include="Directory.Designer.vb">
+      <DependentUpon>Directory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Directory.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.vb">
-      <DependentUpon>Form1.vb</DependentUpon>
+    <Compile Include="Explorer.Designer.vb">
+      <DependentUpon>Explorer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Explorer.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
