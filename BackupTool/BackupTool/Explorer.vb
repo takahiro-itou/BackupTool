@@ -55,6 +55,21 @@
 
         If (Strings.Right(strRootDir, 1) = "\") Then strRootDir = Strings.Left(strRootDir, Len(strRootDir) - 1)
 
+        With tspProgressDir
+            .Width = 300
+            .Value = 0
+            .Visible = True
+        End With
+        With tspProgressRoot
+            .Width = 200
+            .Value = 0
+            .Visible = True
+        End With
+        With tsStatusLabel
+            .Text = ""
+            .Visible = True
+        End With
+
         'ルートディレクトリを作成する
         With mobjDirectoryTree
             If (blnInitTree) Then
@@ -71,8 +86,22 @@
             End Try
 
             'ルートディレクトリ内のサブディレクトリやファイルを処理する
-            MakeDirTreeSub(lngNodeIndex, strRootDir, 0, blnProcessSubDirectory)
+            MakeDirTreeSub(lngNodeIndex, strRootDir, 0, blnProcessSubDirectory, 3)
         End With
+
+        With tspProgressDir
+            .Value = 0
+            .Visible = False
+        End With
+        With tspProgressRoot
+            .Value = 0
+            .Visible = False
+        End With
+        With tsStatusLabel
+            .Text = ""
+            .Visible = False
+        End With
+
     End Sub
 
     Public Function SelectDirectory(ByVal strInitDir As String) As String
@@ -92,7 +121,7 @@
 
         'Unload objfDir
         objfDir = Nothing
-        SelectDirectory = "E:\VbNet"
+        SelectDirectory = "F:"
     End Function
 
     Public Sub UpdateExplorer(ByVal strRootDir As String, _
@@ -129,7 +158,7 @@
             .Nodes.Add(trvNode)
         End With
 
-        UpdateExplorerSub(0, 0, trvNode)
+        UpdateExplorerSub(0, 0, trvNode, -1)
 
         Refresh()
     End Sub
@@ -167,21 +196,22 @@
                 strEntry = .NodeData(j)
 
                 .GetNodesSizeField(j, objSize)
-                strSizeText = Strings.Right(Space$(14) & objSize.LongIntegerToString(3), 14)
+                strSizeText = Strings.Right(Space$(18) & objSize.LongIntegerToString(3), 18)
 
                 lngFileField = .NodesFileField(j)
                 lngDirsField = .NodesDirsField(j)
                 lngTimeField = .NodesTimeField(j)
 
+                strNodeData = strEntry
                 Select Case lngSortKey
                     Case 1 '名前
                         strNodeData = strEntry
                     Case 2 'サイズ
                         strNodeData = strSizeText
                     Case 3 'サブフォルダ数
-                        strNodeData = LongToString(lngDirsField, 14, " ")
+                        strNodeData = LongToString(lngDirsField, 0, " ")
                     Case 4 'ファイル総数
-                        strNodeData = LongToString(lngFileField, 14, " ")
+                        strNodeData = LongToString(lngFileField, 0, " ")
                     Case 5 '更新日時
                         strNodeData = lngTimeField
                 End Select
@@ -192,15 +222,19 @@
                 '挿入する
                 If (lngNodeType = TREE_LEAF) Then
                     objListItem = New ListViewItem(strEntry, ItemImage.File)
+                    objListItem.SubItems.Add(strSizeText)
+
                     'objListItem = objItems.Add(lngInsertPos, "f;" & strEntry, strEntry, "File", "File")
+                    objListItem.SubItems.Add("")
+                    objListItem.SubItems.Add("")
                 ElseIf (lngNodeType = TREE_NODE) Then
                     objListItem = New ListViewItem(strEntry, ItemImage.ClosedFolder)
                     'objListItem = objItems.Add(lngInsertPos, "d;" & strEntry, strEntry, "Folder", "Folder")
-                    objListItem.SubItems(2).Text = LongToString(lngDirsField, 14, " ")
-                    objListItem.SubItems(3).Text = LongToString(lngFileField, 14, " ")
+                    objListItem.SubItems.Add(strSizeText)
+                    objListItem.SubItems.Add(LongToString(lngDirsField, 0, " "))
+                    objListItem.SubItems.Add(LongToString(lngFileField, 0, " "))
                 End If
-                objListItem.SubItems(1).Text = strSizeText
-                objListItem.SubItems(4).Text = lngTimeField
+                objListItem.SubItems.Add(lngTimeField)
                 objItems.Add(objListItem)
             Next i
         End With
@@ -322,19 +356,31 @@
 
     Private Function LongToString(ByVal lngValue As Long, ByVal lngDigit As Integer, ByVal strBlank As String) As String
         Dim i As Integer
+        Dim strResult As String
+
+        strResult = Format$(lngValue, "#,##0")
+        If (strResult.Length >= lngDigit) Then
+            LongToString = strResult
+            Exit Function
+        End If
+
         Dim strPad As System.Text.StringBuilder = New System.Text.StringBuilder(strBlank.Length * lngDigit)
         For i = 1 To lngDigit - 1
             strPad.Append(strBlank)
         Next
-        LongToString = Strings.Right(strPad.ToString() & Format$(lngValue, "#,##0"), lngDigit)
+
+        LongToString = Strings.Right(strPad.ToString() & strResult, lngDigit)
     End Function
+
     Private Sub MakeDirTreeSub(ByVal lngBaseIndex As Long, ByVal strBaseDir As String, _
-        ByVal lngDepth As Long, ByVal blnProcessSubDirectory As Boolean)
+        ByVal lngDepth As Integer, ByVal blnProcessSubDirectory As Boolean, _
+        ByVal maxProgressDepth As Integer
+    )
         '------------------------------------------------------------------------------
         '指定したディレクトリ以下のディレクトリ構造を読み取ってツリーを作る
         '------------------------------------------------------------------------------
-        Dim i As Long
-        Dim lngChildCount As Long, lngChildIndex As Long, lngChildNodeType As Long
+        Dim i As Integer
+        Dim lngChildCount As Integer, lngChildIndex As Long, lngChildNodeType As Long
         Dim strDir As String, strCurDir As String
         Dim lngFileCount As Long, lngDirsCount As Long
         Dim lngSize As Long
@@ -381,14 +427,29 @@
                 If (lngChildNodeType = TREE_NODE) Then
                     'この子ノードがディレクトリの場合
                     '進行状況を表示する
+                    tsStatusLabel.Text = strDir
+                    If (lngDepth <= 0) Then
+                        With tspProgressRoot
+                            .Minimum = 0
+                            .Maximum = lngChildCount
+                            .Value = i + 1
+                        End With
+                    End If
+                    If (lngDepth <= maxProgressDepth) Then
+                        With tspProgressDir
+                            .Minimum = 0
+                            .Maximum = lngChildCount
+                            .Value = i + 1
+                        End With
+                    End If
                     '進行状況を指定されたオブジェクトへ転送表示する
 
                     '
                     If (blnProcessSubDirectory) Then
                         If ((lngDepth = 0) And (lngChildCount = 1)) Then
-                            MakeDirTreeSub(lngChildIndex, strDir, lngDepth, True)
+                            MakeDirTreeSub(lngChildIndex, strDir, lngDepth, True, maxProgressDepth)
                         Else
-                            MakeDirTreeSub(lngChildIndex, strDir, lngDepth + 1, True)
+                            MakeDirTreeSub(lngChildIndex, strDir, lngDepth + 1, True, maxProgressDepth)
                         End If
                     End If
 
@@ -436,7 +497,7 @@
 
     End Sub
 
-    Private Sub UpdateExplorerSub(ByVal lngBaseNodeIndex As Long, ByVal lngDepth As Long, ByVal parentNode As TreeNode)
+    Private Sub UpdateExplorerSub(ByVal lngBaseNodeIndex As Long, ByVal lngDepth As Integer, ByVal parentNode As TreeNode, ByVal maxExpandDepth As Integer)
         '------------------------------------------------------------------------------
         '指定したディレクトリ以下の階層の表示を更新する
         '------------------------------------------------------------------------------
@@ -463,12 +524,12 @@
 
                     'この子ノードと、それ以下のノードを処理する
                     strNodeData = .NodeData(j)
-                    If (lngDepth < 2) Then
+                    If (maxExpandDepth < 0) Or (lngDepth < maxExpandDepth) Then
                         strKey = GetNodeKeyName(j, True)
                         trvNodeNew = New TreeNode(strNodeData, ItemImage.ClosedFolder, ItemImage.OpenedFolder)
                         trvNodeNew.Name = strKey
                         parentNode.Nodes.Add(trvNodeNew)
-                        UpdateExplorerSub(j, lngDepth + 1, trvNodeNew)
+                        UpdateExplorerSub(j, lngDepth + 1, trvNodeNew, maxExpandDepth)
                     Else
                         strKey = GetNodeKeyName(j, False)
                         trvNodeNew = New TreeNode(strNodeData, ItemImage.ClosedFolder, ItemImage.OpenedFolder)
@@ -513,4 +574,5 @@
         mstrRootDirectory = strTemp
         UpdateExplorer(strTemp, True, True)
     End Sub
+
 End Class
