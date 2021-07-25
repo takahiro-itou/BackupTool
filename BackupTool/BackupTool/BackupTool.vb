@@ -96,6 +96,7 @@
         Public lpChild() As Long               '子ノードへのポインタ(配列のインデックス)
     End Structure
 
+
     Public Sub ActivateExplorer(ByVal lngIndex As Long)
         '------------------------------------------------------------------------------
         'エクスプローラをアクティブにする

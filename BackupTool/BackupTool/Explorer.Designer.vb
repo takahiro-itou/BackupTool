@@ -24,39 +24,41 @@ Partial Class Explorer
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.trvDirectory = New System.Windows.Forms.TreeView()
+        Me.imlExplorer = New System.Windows.Forms.ImageList(Me.components)
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.lsvFile = New System.Windows.Forms.ListView()
-        Me.imlExplorer = New System.Windows.Forms.ImageList(Me.components)
         Me.SuspendLayout()
         '
         'trvDirectory
         '
-        Me.trvDirectory.Location = New System.Drawing.Point(27, 28)
+        Me.trvDirectory.Dock = System.Windows.Forms.DockStyle.Left
+        Me.trvDirectory.Location = New System.Drawing.Point(0, 0)
         Me.trvDirectory.Name = "trvDirectory"
-        Me.trvDirectory.Size = New System.Drawing.Size(217, 141)
+        Me.trvDirectory.Size = New System.Drawing.Size(217, 261)
         Me.trvDirectory.TabIndex = 0
-        '
-        'Splitter1
-        '
-        Me.Splitter1.Location = New System.Drawing.Point(0, 0)
-        Me.Splitter1.Name = "Splitter1"
-        Me.Splitter1.Size = New System.Drawing.Size(9, 261)
-        Me.Splitter1.TabIndex = 1
-        Me.Splitter1.TabStop = False
-        '
-        'lsvFile
-        '
-        Me.lsvFile.Location = New System.Drawing.Point(309, 42)
-        Me.lsvFile.Name = "lsvFile"
-        Me.lsvFile.Size = New System.Drawing.Size(320, 207)
-        Me.lsvFile.TabIndex = 2
-        Me.lsvFile.UseCompatibleStateImageBehavior = False
         '
         'imlExplorer
         '
         Me.imlExplorer.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
         Me.imlExplorer.ImageSize = New System.Drawing.Size(16, 16)
         Me.imlExplorer.TransparentColor = System.Drawing.Color.Transparent
+        '
+        'Splitter1
+        '
+        Me.Splitter1.Location = New System.Drawing.Point(217, 0)
+        Me.Splitter1.Name = "Splitter1"
+        Me.Splitter1.Size = New System.Drawing.Size(9, 261)
+        Me.Splitter1.TabIndex = 3
+        Me.Splitter1.TabStop = False
+        '
+        'lsvFile
+        '
+        Me.lsvFile.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lsvFile.Location = New System.Drawing.Point(226, 0)
+        Me.lsvFile.Name = "lsvFile"
+        Me.lsvFile.Size = New System.Drawing.Size(542, 261)
+        Me.lsvFile.TabIndex = 4
+        Me.lsvFile.UseCompatibleStateImageBehavior = False
         '
         'Explorer
         '
@@ -72,7 +74,7 @@ Partial Class Explorer
 
     End Sub
     Friend WithEvents trvDirectory As System.Windows.Forms.TreeView
+    Friend WithEvents imlExplorer As System.Windows.Forms.ImageList
     Friend WithEvents Splitter1 As System.Windows.Forms.Splitter
     Friend WithEvents lsvFile As System.Windows.Forms.ListView
-    Friend WithEvents imlExplorer As System.Windows.Forms.ImageList
 End Class
