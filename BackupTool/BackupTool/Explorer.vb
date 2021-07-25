@@ -65,7 +65,10 @@
 
             '指定されたディレクトリをルートの下に作る
             lngNodeIndex = .AddChildNode(0, TREE_NODE, strRootDir, False)
-            .NodesTimeField(lngNodeIndex) = FileDateTime(strRootDir)
+            Try
+                .NodesTimeField(lngNodeIndex) = FileDateTime(strRootDir)
+            Catch
+            End Try
 
             'ルートディレクトリ内のサブディレクトリやファイルを処理する
             MakeDirTreeSub(lngNodeIndex, strRootDir, 0, blnProcessSubDirectory)
@@ -89,7 +92,7 @@
 
         'Unload objfDir
         objfDir = Nothing
-        SelectDirectory = gstrAppPath
+        SelectDirectory = "E:\VbNet"
     End Function
 
     Public Sub UpdateExplorer(ByVal strRootDir As String, _
@@ -121,11 +124,12 @@
         With trvDirectory
             .Nodes.Clear()
             trvNode = New TreeNode(mobjDirectoryTree.NodeData(0), ItemImage.ClosedFolder, ItemImage.OpenedFolder)
+            trvNode.Name = GetNodeKeyName(0, True)
             '.Nodes.Add, , GetNodeKeyName(0, True), mobjDirectoryTree.NodeData(0), "Closed"
             .Nodes.Add(trvNode)
         End With
 
-        UpdateExplorerSub(0, 0)
+        UpdateExplorerSub(0, 0, trvNode)
 
         Refresh()
     End Sub
@@ -240,7 +244,7 @@
                 '昇順
                 If (lngInsertType = TREE_NODE) Then
                     'ディレクトリは、ファイルより先に表示
-                    If (lpListItems(i).ImageIndex = ItemImage.File ) Then
+                    If (lpListItems(i).ImageIndex = ItemImage.File) Then
                         lngInsertPos = i
                         Exit For
                     Else
@@ -389,7 +393,10 @@
                     End If
 
                     '子ノードの情報を更新する
-                    .NodesTimeField(lngChildIndex) = FileDateTime(strDir)
+                    Try
+                        .NodesTimeField(lngChildIndex) = FileDateTime(strDir)
+                    Catch
+                    End Try
 
                     '子ノードの情報を集計して、親（現在の）ノードに通知する
                     lngFileCount = lngFileCount + .NodesFileField(lngChildIndex)
@@ -429,7 +436,7 @@
 
     End Sub
 
-    Private Sub UpdateExplorerSub(ByVal lngBaseNodeIndex As Long, ByVal lngDepth As Long)
+    Private Sub UpdateExplorerSub(ByVal lngBaseNodeIndex As Long, ByVal lngDepth As Long, ByVal parentNode As TreeNode)
         '------------------------------------------------------------------------------
         '指定したディレクトリ以下の階層の表示を更新する
         '------------------------------------------------------------------------------
@@ -459,12 +466,14 @@
                     If (lngDepth < 2) Then
                         strKey = GetNodeKeyName(j, True)
                         trvNodeNew = New TreeNode(strNodeData, ItemImage.ClosedFolder, ItemImage.OpenedFolder)
-                        trvDirectory.Nodes.Add(trvNodeNew)
-                        UpdateExplorerSub(j, lngDepth + 1)
+                        trvNodeNew.Name = strKey
+                        parentNode.Nodes.Add(trvNodeNew)
+                        UpdateExplorerSub(j, lngDepth + 1, trvNodeNew)
                     Else
                         strKey = GetNodeKeyName(j, False)
                         trvNodeNew = New TreeNode(strNodeData, ItemImage.ClosedFolder, ItemImage.OpenedFolder)
-                        trvDirectory.Nodes.Add(trvNodeNew)
+                        trvNodeNew.Name = strKey
+                        parentNode.Nodes.Add(trvNodeNew)
                     End If
                 End If
             Next i
@@ -472,7 +481,36 @@
     End Sub
 
     Private Sub trvDirectory_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles trvDirectory.AfterSelect
+        '------------------------------------------------------------------------------
+        'ツリービューコントロールのノードをクリックした場合は
+        'そのディレクトリの内容をリストビューコントロールに表示する
+        '------------------------------------------------------------------------------
+        Dim strKey As String
 
+        'If (Not (mobjPrevNode Is Nothing)) Then mobjPrevNode.Image = "Closed"
+
+        mobjPrevNode = e.Node
+
+        strKey = e.Node.Name
+        If (Strings.Left$(strKey, 7) = "key_dir") Then
+            mlngCurDirectory = Val(Mid$(strKey, 8))
+            '        If (mlngCurDirectory = 0) Then
+            '            mlngSortKey = 0
+            '        End If
+            UpdateFileList(mlngCurDirectory, mlngSortKey, mlngSortOrder)
+        End If
     End Sub
 
+    Private Sub OpenDirectoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenDirectoryToolStripMenuItem.Click
+        '------------------------------------------------------------------------------
+        'ディレクトリを開く
+        '------------------------------------------------------------------------------
+        Dim strTemp As String
+
+        strTemp = SelectDirectory(mstrRootDirectory)
+        If (strTemp = "") Then Exit Sub
+
+        mstrRootDirectory = strTemp
+        UpdateExplorer(strTemp, True, True)
+    End Sub
 End Class
