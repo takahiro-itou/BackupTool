@@ -382,7 +382,10 @@
         Dim i As Integer
         Dim lngChildCount As Integer, lngChildIndex As Long, lngChildNodeType As Long
         Dim strDir As String, strCurDir As String
+        Dim strNameLower As String
         Dim lngFileCount As Long, lngDirsCount As Long
+        Dim numWmvFile As Long, sizeWmvFile As Long
+        Dim numMpgFile As Long, sizeMpgFile As Long
         Dim lngSize As Long
         Dim objTotalSize As CLongInteger, objChildSize As CLongInteger
 
@@ -412,6 +415,10 @@
         'サブディレクトリを処理する
         lngFileCount = 0
         lngDirsCount = 0
+        numWmvFile = 0
+        numMpgFile = 0
+        sizeWmvFile = 0
+        sizeMpgFile = 0
         objTotalSize = New CLongInteger
         objTotalSize.SetValue(0)
 
@@ -462,6 +469,10 @@
                     '子ノードの情報を集計して、親（現在の）ノードに通知する
                     lngFileCount = lngFileCount + .NodesFileField(lngChildIndex)
                     lngDirsCount = lngDirsCount + .NodesDirsField(lngChildIndex) + 1
+                    numWmvFile = numWmvFile + .NodesWmvFileField(lngChildIndex)
+                    numMpgFile = numMpgFile + .NodesMpgFileField(lngChildIndex)
+                    sizeWmvFile = sizeWmvFile + .NodesWmvSizeField(lngChildIndex)
+                    sizeMpgFile = sizeMpgFile + .NodesMpgSizeField(lngChildIndex)
 
                     objChildSize = New CLongInteger
                     .GetNodesSizeField(lngChildIndex, objChildSize)
@@ -470,6 +481,7 @@
 
                 ElseIf (lngChildNodeType = TREE_LEAF) Then
                     'この子ノードがファイルの場合
+                    strNameLower = .NodeData(lngChildIndex).ToLower()
 
                     lngSize = FileLen(strDir)
 
@@ -477,6 +489,15 @@
                     .NodesTimeField(lngChildIndex) = FileDateTime(strDir)
                     .NodesDirsField(lngChildIndex) = 0
                     .NodesFileField(lngChildIndex) = 0
+
+                    If strNameLower.EndsWith(".wmv") Then
+                        numWmvFile = numWmvFile + 1
+                        sizeWmvFile = sizeWmvFile + lngSize
+                    End If
+                    If strNameLower.EndsWith(".mpg") Then
+                        numMpgFile = numMpgFile + 1
+                        sizeMpgFile = sizeMpgFile + lngSize
+                    End If
 
                     lngFileCount = lngFileCount + 1
                     objTotalSize.AddInteger(lngSize)
@@ -486,8 +507,13 @@
             'このノードにデータを書き込む
             .NodesFileField(lngBaseIndex) = lngFileCount
             .NodesDirsField(lngBaseIndex) = lngDirsCount
+            .NodesWmvFileField(lngBaseIndex) = numWmvFile
+            .NodesWmvSizeField(lngBaseIndex) = sizeWmvFile
+            .NodesMpgFileField(lngBaseIndex) = numMpgFile
+            .NodesMpgSizeField(lngBaseIndex) = sizeMpgFile
             .SetNodesSizeField(lngBaseIndex, -1, objTotalSize)
         End With
+
     End Sub
 
     Private Sub SetControlSize(ByVal lngSplitterPos As Long)
