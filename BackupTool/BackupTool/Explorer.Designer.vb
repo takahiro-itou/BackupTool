@@ -39,11 +39,11 @@ Partial Class Explorer
         Me.colFileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colNumFolder = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colNumFile = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colTimeStamp = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.colNumWmv = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colWmvSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colMpgSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colNumWmv = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colNumMpg = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colTimeStamp = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.mnuMainMenu.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -61,7 +61,7 @@ Partial Class Explorer
         Me.mnuMainMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
         Me.mnuMainMenu.Location = New System.Drawing.Point(0, 0)
         Me.mnuMainMenu.Name = "mnuMainMenu"
-        Me.mnuMainMenu.Size = New System.Drawing.Size(1060, 24)
+        Me.mnuMainMenu.Size = New System.Drawing.Size(1104, 24)
         Me.mnuMainMenu.TabIndex = 5
         Me.mnuMainMenu.Text = "MenuStrip1"
         '
@@ -75,7 +75,7 @@ Partial Class Explorer
         'OpenDirectoryToolStripMenuItem
         '
         Me.OpenDirectoryToolStripMenuItem.Name = "OpenDirectoryToolStripMenuItem"
-        Me.OpenDirectoryToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.OpenDirectoryToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.OpenDirectoryToolStripMenuItem.Text = "Open &Directory"
         '
         'StatusStrip1
@@ -83,7 +83,7 @@ Partial Class Explorer
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tspProgressRoot, Me.tspProgressDir, Me.tsStatusLabel})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 479)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1060, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1104, 22)
         Me.StatusStrip1.TabIndex = 6
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -129,7 +129,7 @@ Partial Class Explorer
         Me.lsvFile.HideSelection = False
         Me.lsvFile.Location = New System.Drawing.Point(271, 24)
         Me.lsvFile.Name = "lsvFile"
-        Me.lsvFile.Size = New System.Drawing.Size(789, 455)
+        Me.lsvFile.Size = New System.Drawing.Size(833, 455)
         Me.lsvFile.TabIndex = 9
         Me.lsvFile.UseCompatibleStateImageBehavior = False
         Me.lsvFile.View = System.Windows.Forms.View.Details
@@ -155,33 +155,37 @@ Partial Class Explorer
         Me.colNumFile.Text = "ファイル数"
         Me.colNumFile.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'colTimeStamp
-        '
-        Me.colTimeStamp.Text = "更新日時"
-        Me.colTimeStamp.Width = 100
-        '
-        'colNumWmv
-        '
-        Me.colNumWmv.Text = "wmv 数"
-        '
         'colWmvSize
         '
         Me.colWmvSize.Text = "wnv サイズ"
+        Me.colWmvSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.colWmvSize.Width = 80
         '
         'colMpgSize
         '
         Me.colMpgSize.Text = "mpg サイズ"
+        Me.colMpgSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.colMpgSize.Width = 80
+        '
+        'colNumWmv
+        '
+        Me.colNumWmv.Text = "wmv 数"
+        Me.colNumWmv.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'colNumMpg
         '
         Me.colNumMpg.Text = "mpg 数"
+        Me.colNumMpg.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        '
+        'colTimeStamp
+        '
+        Me.colTimeStamp.Text = "更新日時"
+        Me.colTimeStamp.Width = 100
         '
         'Explorer
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(1060, 501)
+        Me.ClientSize = New System.Drawing.Size(1104, 501)
         Me.Controls.Add(Me.lsvFile)
         Me.Controls.Add(Me.Splitter1)
         Me.Controls.Add(Me.trvDirectory)
