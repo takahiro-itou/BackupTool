@@ -510,10 +510,14 @@
                     .NodesFileField(lngChildIndex) = 0
 
                     If strNameLower.EndsWith(".wmv") Then
+                        .NodesWmvFileField(lngChildIndex) = 1
+                        .NodesWmvSizeField(lngChildIndex) = lngSize
                         numWmvFile = numWmvFile + 1
                         sizeWmvFile = sizeWmvFile + lngSize
                     End If
                     If strNameLower.EndsWith(".mpg") Then
+                        .NodesMpgFileField(lngChildIndex) = 1
+                        .NodesMpgSizeField(lngChildIndex) = lngSize
                         numMpgFile = numMpgFile + 1
                         sizeMpgFile = sizeMpgFile + lngSize
                     End If
