@@ -92,8 +92,8 @@
 
         Public numWmvFile As Long               ' 拡張子 .wmv ファイルの総数 (サブディレクトリ含む)
         Public numMpgFile As Long               ' 拡張子 .mpg ファイルの総数 (サブディレクトリ含む)
-        Public sizeWmvFile As CLongInteger      ' 拡張子 .wmv ファイルのサイズ
-        Public sizeMpgFile As CLongInteger      ' 拡張子 .mpg ファイルのサイズ
+        Public sizeWmvFile As Long              ' 拡張子 .wmv ファイルのサイズ
+        Public sizeMpgFile As Long              ' 拡張子 .mpg ファイルのサイズ
 
         '親と子供
         Public lpParent As Long                '親ノードへのポインタ(配列のインデックス)

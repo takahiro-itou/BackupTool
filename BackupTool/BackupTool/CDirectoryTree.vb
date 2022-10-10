@@ -153,7 +153,7 @@
         End With
     End Sub
 
-    Public Sub InitializeTree(ByVal lngRootNodeType As Long, _
+    Public Sub InitializeTree(ByVal lngRootNodeType As Long,
         ByVal strRootNodeData As String, Optional ByVal lngStartBufferSize As Long = 1024)
         '------------------------------------------------------------------------------
         'ツリーを初期化する
@@ -305,6 +305,24 @@
         End Set
     End Property
 
+    Public Property NodesMpgFileField(ByVal Index As Integer) As Long
+        Get
+            NodesMpgFileField = mutTreeData(Index).numMpgFile
+        End Get
+        Set(ByVal lngNewValue As Long)
+            mutTreeData(Index).numMpgFile = lngNewValue
+        End Set
+    End Property
+
+    Public Property NodesMpgSizeField(ByVal Index As Integer) As Long
+        Get
+            NodesMpgSizeField = mutTreeData(Index).sizeMpgFile
+        End Get
+        Set(ByVal lngNewValue As Long)
+            mutTreeData(Index).sizeMpgFile = lngNewValue
+        End Set
+    End Property
+
 
     Public ReadOnly Property NodeParent(ByVal Index As Long) As Long
         Get
@@ -319,6 +337,23 @@
         End Get
     End Property
 
+    Public Property NodesWmvFileField(ByVal Index As Integer) As Long
+        Get
+            NodesWmvFileField = mutTreeData(Index).numWmvFile
+        End Get
+        Set(ByVal lngNewValue As Long)
+            mutTreeData(Index).numWmvFile = lngNewValue
+        End Set
+    End Property
+
+    Public Property NodesWmvSizeField(ByVal Index As Integer) As Long
+        Get
+            NodesWmvSizeField = mutTreeData(Index).sizeWmvFile
+        End Get
+        Set(ByVal lngNewValue As Long)
+            mutTreeData(Index).sizeWmvFile = lngNewValue
+        End Set
+    End Property
 
     Public ReadOnly Property TreeSize() As Long
         Get
