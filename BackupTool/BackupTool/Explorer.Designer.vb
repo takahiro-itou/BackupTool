@@ -40,6 +40,10 @@ Partial Class Explorer
         Me.colNumFolder = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colNumFile = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.colTimeStamp = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colNumWmv = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colWmvSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colMpgSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colNumMpg = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.mnuMainMenu.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -57,7 +61,7 @@ Partial Class Explorer
         Me.mnuMainMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
         Me.mnuMainMenu.Location = New System.Drawing.Point(0, 0)
         Me.mnuMainMenu.Name = "mnuMainMenu"
-        Me.mnuMainMenu.Size = New System.Drawing.Size(898, 24)
+        Me.mnuMainMenu.Size = New System.Drawing.Size(1060, 24)
         Me.mnuMainMenu.TabIndex = 5
         Me.mnuMainMenu.Text = "MenuStrip1"
         '
@@ -77,9 +81,9 @@ Partial Class Explorer
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tspProgressRoot, Me.tspProgressDir, Me.tsStatusLabel})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 492)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 479)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(898, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(1060, 22)
         Me.StatusStrip1.TabIndex = 6
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -106,25 +110,26 @@ Partial Class Explorer
         Me.trvDirectory.Location = New System.Drawing.Point(0, 24)
         Me.trvDirectory.Name = "trvDirectory"
         Me.trvDirectory.SelectedImageIndex = 0
-        Me.trvDirectory.Size = New System.Drawing.Size(306, 468)
+        Me.trvDirectory.Size = New System.Drawing.Size(256, 455)
         Me.trvDirectory.TabIndex = 7
         '
         'Splitter1
         '
-        Me.Splitter1.Location = New System.Drawing.Point(306, 24)
+        Me.Splitter1.Location = New System.Drawing.Point(256, 24)
         Me.Splitter1.Name = "Splitter1"
-        Me.Splitter1.Size = New System.Drawing.Size(15, 468)
+        Me.Splitter1.Size = New System.Drawing.Size(15, 455)
         Me.Splitter1.TabIndex = 8
         Me.Splitter1.TabStop = False
         '
         'lsvFile
         '
-        Me.lsvFile.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colFileName, Me.colFileSize, Me.colNumFolder, Me.colNumFile, Me.colTimeStamp})
+        Me.lsvFile.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colFileName, Me.colFileSize, Me.colNumFolder, Me.colNumFile, Me.colWmvSize, Me.colMpgSize, Me.colNumWmv, Me.colNumMpg, Me.colTimeStamp})
         Me.lsvFile.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lsvFile.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.lsvFile.HideSelection = False
-        Me.lsvFile.Location = New System.Drawing.Point(321, 24)
+        Me.lsvFile.Location = New System.Drawing.Point(271, 24)
         Me.lsvFile.Name = "lsvFile"
-        Me.lsvFile.Size = New System.Drawing.Size(577, 468)
+        Me.lsvFile.Size = New System.Drawing.Size(789, 455)
         Me.lsvFile.TabIndex = 9
         Me.lsvFile.UseCompatibleStateImageBehavior = False
         Me.lsvFile.View = System.Windows.Forms.View.Details
@@ -132,13 +137,13 @@ Partial Class Explorer
         'colFileName
         '
         Me.colFileName.Text = "名前"
-        Me.colFileName.Width = 200
+        Me.colFileName.Width = 192
         '
         'colFileSize
         '
         Me.colFileSize.Text = "サイズ"
         Me.colFileSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.colFileSize.Width = 100
+        Me.colFileSize.Width = 112
         '
         'colNumFolder
         '
@@ -155,11 +160,28 @@ Partial Class Explorer
         Me.colTimeStamp.Text = "更新日時"
         Me.colTimeStamp.Width = 100
         '
+        'colNumWmv
+        '
+        Me.colNumWmv.Text = "wmv 数"
+        '
+        'colWmvSize
+        '
+        Me.colWmvSize.Text = "wnv サイズ"
+        Me.colWmvSize.Width = 80
+        '
+        'colMpgSize
+        '
+        Me.colMpgSize.Text = "mpg サイズ"
+        Me.colMpgSize.Width = 80
+        '
+        'colNumMpg
+        '
+        Me.colNumMpg.Text = "mpg 数"
+        '
         'Explorer
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(898, 514)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
+        Me.ClientSize = New System.Drawing.Size(1060, 501)
         Me.Controls.Add(Me.lsvFile)
         Me.Controls.Add(Me.Splitter1)
         Me.Controls.Add(Me.trvDirectory)
@@ -192,4 +214,8 @@ Partial Class Explorer
     Friend WithEvents tspProgressRoot As System.Windows.Forms.ToolStripProgressBar
     Friend WithEvents tsStatusLabel As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents tspProgressDir As System.Windows.Forms.ToolStripProgressBar
+    Friend WithEvents colNumWmv As ColumnHeader
+    Friend WithEvents colWmvSize As ColumnHeader
+    Friend WithEvents colMpgSize As ColumnHeader
+    Friend WithEvents colNumMpg As ColumnHeader
 End Class
