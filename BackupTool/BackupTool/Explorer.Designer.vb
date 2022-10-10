@@ -157,7 +157,7 @@ Partial Class Explorer
         '
         'colWmvSize
         '
-        Me.colWmvSize.Text = "wnv サイズ"
+        Me.colWmvSize.Text = "wmv サイズ"
         Me.colWmvSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.colWmvSize.Width = 80
         '
