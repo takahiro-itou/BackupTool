@@ -18,7 +18,7 @@ Partial Class Explorer
     Private components As System.ComponentModel.IContainer
 
     'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
+    'It can be modified using the Windows Form Designer.
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
@@ -35,11 +35,11 @@ Partial Class Explorer
         Me.trvDirectory = New System.Windows.Forms.TreeView()
         Me.Splitter1 = New System.Windows.Forms.Splitter()
         Me.lsvFile = New System.Windows.Forms.ListView()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colFileName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colFileSize = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colNumFolder = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colNumFile = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.colTimeStamp = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.mnuMainMenu.SuspendLayout()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -119,8 +119,9 @@ Partial Class Explorer
         '
         'lsvFile
         '
-        Me.lsvFile.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4, Me.ColumnHeader5})
+        Me.lsvFile.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colFileName, Me.colFileSize, Me.colNumFolder, Me.colNumFile, Me.colTimeStamp})
         Me.lsvFile.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lsvFile.HideSelection = False
         Me.lsvFile.Location = New System.Drawing.Point(321, 24)
         Me.lsvFile.Name = "lsvFile"
         Me.lsvFile.Size = New System.Drawing.Size(577, 468)
@@ -128,31 +129,31 @@ Partial Class Explorer
         Me.lsvFile.UseCompatibleStateImageBehavior = False
         Me.lsvFile.View = System.Windows.Forms.View.Details
         '
-        'ColumnHeader1
+        'colFileName
         '
-        Me.ColumnHeader1.Text = "名前"
-        Me.ColumnHeader1.Width = 200
+        Me.colFileName.Text = "名前"
+        Me.colFileName.Width = 200
         '
-        'ColumnHeader2
+        'colFileSize
         '
-        Me.ColumnHeader2.Text = "サイズ"
-        Me.ColumnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.ColumnHeader2.Width = 100
+        Me.colFileSize.Text = "サイズ"
+        Me.colFileSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.colFileSize.Width = 100
         '
-        'ColumnHeader3
+        'colNumFolder
         '
-        Me.ColumnHeader3.Text = "フォルダ数"
-        Me.ColumnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.colNumFolder.Text = "フォルダ数"
+        Me.colNumFolder.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'ColumnHeader4
+        'colNumFile
         '
-        Me.ColumnHeader4.Text = "ファイル数"
-        Me.ColumnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.colNumFile.Text = "ファイル数"
+        Me.colNumFile.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'ColumnHeader5
+        'colTimeStamp
         '
-        Me.ColumnHeader5.Text = "更新日時"
-        Me.ColumnHeader5.Width = 100
+        Me.colTimeStamp.Text = "更新日時"
+        Me.colTimeStamp.Width = 100
         '
         'Explorer
         '
@@ -183,11 +184,11 @@ Partial Class Explorer
     Friend WithEvents trvDirectory As System.Windows.Forms.TreeView
     Friend WithEvents Splitter1 As System.Windows.Forms.Splitter
     Friend WithEvents lsvFile As System.Windows.Forms.ListView
-    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
-    Friend WithEvents ColumnHeader5 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents colFileName As System.Windows.Forms.ColumnHeader
+    Friend WithEvents colFileSize As System.Windows.Forms.ColumnHeader
+    Friend WithEvents colNumFolder As System.Windows.Forms.ColumnHeader
+    Friend WithEvents colNumFile As System.Windows.Forms.ColumnHeader
+    Friend WithEvents colTimeStamp As System.Windows.Forms.ColumnHeader
     Friend WithEvents tspProgressRoot As System.Windows.Forms.ToolStripProgressBar
     Friend WithEvents tsStatusLabel As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents tspProgressDir As System.Windows.Forms.ToolStripProgressBar
