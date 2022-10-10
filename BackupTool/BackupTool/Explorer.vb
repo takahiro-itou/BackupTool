@@ -174,6 +174,8 @@
         Dim lngFileField As Long, lngDirsField As Long
         Dim lngTimeField As Date
         Dim lngNodeType As Long
+        Dim numWmvFile As Long, sizeWmvFile As Long
+        Dim numMpgFile As Long, sizeMpgFile As Long
         Dim strEntry As String, strTemp As String
         Dim strNodeData As String, strSizeText As String
         Dim objListItem As ListViewItem
@@ -201,6 +203,11 @@
                 lngFileField = .NodesFileField(j)
                 lngDirsField = .NodesDirsField(j)
                 lngTimeField = .NodesTimeField(j)
+                numWmvFile = .NodesWmvFileField(j)
+                sizeWmvFile = .NodesWmvSizeField(j)
+                numMpgFile = .NodesMpgFileField(j)
+                sizeMpgFile = .NodesMpgSizeField(j)
+
 
                 strNodeData = strEntry
                 Select Case lngSortKey
@@ -225,14 +232,26 @@
                     objListItem.SubItems.Add(strSizeText)
 
                     'objListItem = objItems.Add(lngInsertPos, "f;" & strEntry, strEntry, "File", "File")
-                    objListItem.SubItems.Add("")
-                    objListItem.SubItems.Add("")
+                    With objListItem.SubItems
+                        .Add("")
+                        .Add("")
+                        .Add(LongToString(sizeWmvFile, 0, " "))
+                        .Add(LongToString(sizeMpgFile, 0, " "))
+                        .Add(LongToString(numWmvFile, 0, " "))
+                        .Add(LongToString(numMpgFile, 0, " "))
+                    End With
                 ElseIf (lngNodeType = TREE_NODE) Then
                     objListItem = New ListViewItem(strEntry, ItemImage.ClosedFolder)
                     'objListItem = objItems.Add(lngInsertPos, "d;" & strEntry, strEntry, "Folder", "Folder")
-                    objListItem.SubItems.Add(strSizeText)
-                    objListItem.SubItems.Add(LongToString(lngDirsField, 0, " "))
-                    objListItem.SubItems.Add(LongToString(lngFileField, 0, " "))
+                    With objListItem.SubItems
+                        .Add(strSizeText)
+                        .Add(LongToString(lngDirsField, 0, " "))
+                        .Add(LongToString(lngFileField, 0, " "))
+                        .Add(LongToString(sizeWmvFile, 0, " "))
+                        .Add(LongToString(sizeMpgFile, 0, " "))
+                        .Add(LongToString(numWmvFile, 0, " "))
+                        .Add(LongToString(numMpgFile, 0, " "))
+                    End With
                 End If
                 objListItem.SubItems.Add(lngTimeField)
                 objItems.Add(objListItem)
@@ -292,7 +311,7 @@
                         End If
                     End If
                 ElseIf (lngInsertType = TREE_LEAF) Then
-                    'ファイルは、ディレクトリの跡に表示
+                    'ファイルは、ディレクトリの後に表示
                     If (lpListItems(i).ImageIndex = ItemImage.File) Then
                         lngCmpResult = StrComp(strTemp, strInsertKeyData, vbTextCompare)
                         If (lngCmpResult = 1) Then

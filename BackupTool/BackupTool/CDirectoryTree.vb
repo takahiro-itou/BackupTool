@@ -186,7 +186,7 @@
         mlngTreeHeight = 0
     End Sub
 
-    Public Sub SetNodesSizeField(ByVal lngIndex As Long, _
+    Public Sub SetNodesSizeField(ByVal lngIndex As Long,
         ByVal lngSize As Long, ByRef objLongSize As CLongInteger)
         '------------------------------------------------------------------------------
         'ノードのサイズフィールドの値を設定する
