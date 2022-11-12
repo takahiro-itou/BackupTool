@@ -290,7 +290,7 @@
             If (lngSortKey = 1) Then
                 strTemp = lpListItems(i).Text
             Else
-                strTemp = lpListItems(i).SubItems(lngSortKey - 1).text
+                strTemp = lpListItems(i).SubItems(lngSortKey - 1).Text
             End If
 
             If (lngSortOrder = ListSortOrderConstants.lvwAscending) Then
