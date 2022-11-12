@@ -26,8 +26,13 @@ Partial Class Explorer
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Explorer))
         Me.imlExplorer = New System.Windows.Forms.ImageList(Me.components)
         Me.mnuMainMenu = New System.Windows.Forms.MenuStrip()
-        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.OpenDirectoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileOpenSelect = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuOpenAnime = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuOpenRecord = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuFileExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.tspProgressRoot = New System.Windows.Forms.ToolStripProgressBar()
         Me.tspProgressDir = New System.Windows.Forms.ToolStripProgressBar()
@@ -58,134 +63,128 @@ Partial Class Explorer
         '
         'mnuMainMenu
         '
-        Me.mnuMainMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
-        Me.mnuMainMenu.Location = New System.Drawing.Point(0, 0)
+        Me.mnuMainMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile})
+        resources.ApplyResources(Me.mnuMainMenu, "mnuMainMenu")
         Me.mnuMainMenu.Name = "mnuMainMenu"
-        Me.mnuMainMenu.Size = New System.Drawing.Size(1104, 24)
-        Me.mnuMainMenu.TabIndex = 5
-        Me.mnuMainMenu.Text = "MenuStrip1"
         '
-        'FileToolStripMenuItem
+        'mnuFile
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenDirectoryToolStripMenuItem})
-        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
-        Me.FileToolStripMenuItem.Text = "&File"
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileOpenSelect, Me.ToolStripMenuItem1, Me.mnuOpenAnime, Me.mnuOpenRecord, Me.ToolStripMenuItem2, Me.mnuFileExit})
+        Me.mnuFile.Name = "mnuFile"
+        resources.ApplyResources(Me.mnuFile, "mnuFile")
         '
-        'OpenDirectoryToolStripMenuItem
+        'mnuFileOpenSelect
         '
-        Me.OpenDirectoryToolStripMenuItem.Name = "OpenDirectoryToolStripMenuItem"
-        Me.OpenDirectoryToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.OpenDirectoryToolStripMenuItem.Text = "Open &Directory"
+        Me.mnuFileOpenSelect.Name = "mnuFileOpenSelect"
+        resources.ApplyResources(Me.mnuFileOpenSelect, "mnuFileOpenSelect")
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        resources.ApplyResources(Me.ToolStripMenuItem1, "ToolStripMenuItem1")
+        '
+        'mnuOpenAnime
+        '
+        Me.mnuOpenAnime.Name = "mnuOpenAnime"
+        resources.ApplyResources(Me.mnuOpenAnime, "mnuOpenAnime")
+        '
+        'mnuOpenRecord
+        '
+        Me.mnuOpenRecord.Name = "mnuOpenRecord"
+        resources.ApplyResources(Me.mnuOpenRecord, "mnuOpenRecord")
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        resources.ApplyResources(Me.ToolStripMenuItem2, "ToolStripMenuItem2")
+        '
+        'mnuFileExit
+        '
+        Me.mnuFileExit.Name = "mnuFileExit"
+        resources.ApplyResources(Me.mnuFileExit, "mnuFileExit")
         '
         'StatusStrip1
         '
         Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tspProgressRoot, Me.tspProgressDir, Me.tsStatusLabel})
-        Me.StatusStrip1.Location = New System.Drawing.Point(0, 479)
+        resources.ApplyResources(Me.StatusStrip1, "StatusStrip1")
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(1104, 22)
-        Me.StatusStrip1.TabIndex = 6
-        Me.StatusStrip1.Text = "StatusStrip1"
         '
         'tspProgressRoot
         '
         Me.tspProgressRoot.Name = "tspProgressRoot"
-        Me.tspProgressRoot.Size = New System.Drawing.Size(200, 16)
+        resources.ApplyResources(Me.tspProgressRoot, "tspProgressRoot")
         '
         'tspProgressDir
         '
         Me.tspProgressDir.Name = "tspProgressDir"
-        Me.tspProgressDir.Size = New System.Drawing.Size(200, 16)
+        resources.ApplyResources(Me.tspProgressDir, "tspProgressDir")
         '
         'tsStatusLabel
         '
         Me.tsStatusLabel.Name = "tsStatusLabel"
-        Me.tsStatusLabel.Size = New System.Drawing.Size(0, 17)
+        resources.ApplyResources(Me.tsStatusLabel, "tsStatusLabel")
         '
         'trvDirectory
         '
-        Me.trvDirectory.Dock = System.Windows.Forms.DockStyle.Left
-        Me.trvDirectory.ImageIndex = 0
+        resources.ApplyResources(Me.trvDirectory, "trvDirectory")
         Me.trvDirectory.ImageList = Me.imlExplorer
-        Me.trvDirectory.Location = New System.Drawing.Point(0, 24)
         Me.trvDirectory.Name = "trvDirectory"
-        Me.trvDirectory.SelectedImageIndex = 0
-        Me.trvDirectory.Size = New System.Drawing.Size(256, 455)
-        Me.trvDirectory.TabIndex = 7
         '
         'Splitter1
         '
-        Me.Splitter1.Location = New System.Drawing.Point(256, 24)
+        resources.ApplyResources(Me.Splitter1, "Splitter1")
         Me.Splitter1.Name = "Splitter1"
-        Me.Splitter1.Size = New System.Drawing.Size(15, 455)
-        Me.Splitter1.TabIndex = 8
         Me.Splitter1.TabStop = False
         '
         'lsvFile
         '
         Me.lsvFile.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.colFileName, Me.colFileSize, Me.colNumFolder, Me.colNumFile, Me.colWmvSize, Me.colMpgSize, Me.colNumWmv, Me.colNumMpg, Me.colTimeStamp})
-        Me.lsvFile.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lsvFile.Font = New System.Drawing.Font("MS UI Gothic", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        resources.ApplyResources(Me.lsvFile, "lsvFile")
         Me.lsvFile.HideSelection = False
-        Me.lsvFile.Location = New System.Drawing.Point(271, 24)
         Me.lsvFile.Name = "lsvFile"
-        Me.lsvFile.Size = New System.Drawing.Size(833, 455)
-        Me.lsvFile.TabIndex = 9
         Me.lsvFile.UseCompatibleStateImageBehavior = False
         Me.lsvFile.View = System.Windows.Forms.View.Details
         '
         'colFileName
         '
-        Me.colFileName.Text = "名前"
-        Me.colFileName.Width = 192
+        resources.ApplyResources(Me.colFileName, "colFileName")
         '
         'colFileSize
         '
-        Me.colFileSize.Text = "サイズ"
-        Me.colFileSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.colFileSize.Width = 112
+        resources.ApplyResources(Me.colFileSize, "colFileSize")
         '
         'colNumFolder
         '
-        Me.colNumFolder.Text = "フォルダ数"
-        Me.colNumFolder.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        resources.ApplyResources(Me.colNumFolder, "colNumFolder")
         '
         'colNumFile
         '
-        Me.colNumFile.Text = "ファイル数"
-        Me.colNumFile.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        resources.ApplyResources(Me.colNumFile, "colNumFile")
         '
         'colWmvSize
         '
-        Me.colWmvSize.Text = "wmv サイズ"
-        Me.colWmvSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.colWmvSize.Width = 80
+        resources.ApplyResources(Me.colWmvSize, "colWmvSize")
         '
         'colMpgSize
         '
-        Me.colMpgSize.Text = "mpg サイズ"
-        Me.colMpgSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.colMpgSize.Width = 80
+        resources.ApplyResources(Me.colMpgSize, "colMpgSize")
         '
         'colNumWmv
         '
-        Me.colNumWmv.Text = "wmv 数"
-        Me.colNumWmv.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        resources.ApplyResources(Me.colNumWmv, "colNumWmv")
         '
         'colNumMpg
         '
-        Me.colNumMpg.Text = "mpg 数"
-        Me.colNumMpg.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        resources.ApplyResources(Me.colNumMpg, "colNumMpg")
         '
         'colTimeStamp
         '
-        Me.colTimeStamp.Text = "更新日時"
-        Me.colTimeStamp.Width = 100
+        resources.ApplyResources(Me.colTimeStamp, "colTimeStamp")
         '
         'Explorer
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.ClientSize = New System.Drawing.Size(1104, 501)
+        resources.ApplyResources(Me, "$this")
         Me.Controls.Add(Me.lsvFile)
         Me.Controls.Add(Me.Splitter1)
         Me.Controls.Add(Me.trvDirectory)
@@ -193,7 +192,6 @@ Partial Class Explorer
         Me.Controls.Add(Me.mnuMainMenu)
         Me.MainMenuStrip = Me.mnuMainMenu
         Me.Name = "Explorer"
-        Me.Text = "Explorer"
         Me.mnuMainMenu.ResumeLayout(False)
         Me.mnuMainMenu.PerformLayout()
         Me.StatusStrip1.ResumeLayout(False)
@@ -204,8 +202,8 @@ Partial Class Explorer
     End Sub
     Friend WithEvents imlExplorer As System.Windows.Forms.ImageList
     Friend WithEvents mnuMainMenu As System.Windows.Forms.MenuStrip
-    Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents OpenDirectoryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuFile As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuFileOpenSelect As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents StatusStrip1 As System.Windows.Forms.StatusStrip
     Friend WithEvents trvDirectory As System.Windows.Forms.TreeView
     Friend WithEvents Splitter1 As System.Windows.Forms.Splitter
@@ -222,4 +220,9 @@ Partial Class Explorer
     Friend WithEvents colWmvSize As ColumnHeader
     Friend WithEvents colMpgSize As ColumnHeader
     Friend WithEvents colNumMpg As ColumnHeader
+    Friend WithEvents mnuOpenAnime As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem1 As ToolStripSeparator
+    Friend WithEvents mnuOpenRecord As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem2 As ToolStripSeparator
+    Friend WithEvents mnuFileExit As ToolStripMenuItem
 End Class

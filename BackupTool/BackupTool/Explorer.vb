@@ -42,7 +42,7 @@
 
     '******************************************************************************
     'パブリックプロシージャ
-    Public Sub MakeDirectoryTree(ByVal strRootDir As String, _
+    Public Sub MakeDirectoryTree(ByVal strRootDir As String,
         ByVal blnInitTree As Boolean, ByVal blnProcessSubDirectory As Boolean)
         '------------------------------------------------------------------------------
         '指定したディレクトリをルートに持つディレクトリツリーを作成する
@@ -75,7 +75,7 @@
             If (blnInitTree) Then
                 .InitializeTree(TREE_NODE, "バックアップリスト")
                 trvDirectory.Nodes.Clear()
-                lsvFile.Items .Clear()
+                lsvFile.Items.Clear()
             End If
 
             '指定されたディレクトリをルートの下に作る
@@ -124,7 +124,7 @@
         SelectDirectory = "F:"
     End Function
 
-    Public Sub UpdateExplorer(ByVal strRootDir As String, _
+    Public Sub UpdateExplorer(ByVal strRootDir As String,
         ByVal blnInitTree As Boolean, ByVal blnProcessSubDirectory As Boolean)
         '------------------------------------------------------------------------------
         '指定したディレクトリ以下のツリーを作成・表示する
@@ -163,7 +163,7 @@
         Refresh()
     End Sub
 
-    Public Sub UpdateFileList(ByVal lngDirectoryIndex As Long, _
+    Public Sub UpdateFileList(ByVal lngDirectoryIndex As Long,
         ByVal lngSortKey As Long, ByVal lngSortOrder As ListSortOrderConstants)
         '------------------------------------------------------------------------------
         'ファイルの一覧を表示する
@@ -265,8 +265,8 @@
     '******************************************************************************
     'プライベートプロシージャ
 
-    Private Function GetFileListInsertPos(ByRef lpListItems As ListView.ListViewItemCollection, _
-        ByVal lngSortKey As Integer, ByVal lngSortOrder As ListSortOrderConstants, _
+    Private Function GetFileListInsertPos(ByRef lpListItems As ListView.ListViewItemCollection,
+        ByVal lngSortKey As Integer, ByVal lngSortOrder As ListSortOrderConstants,
         ByVal lngInsertType As Long, ByVal strInsertKeyData As String) As Long
         '------------------------------------------------------------------------------
         'strInsertKeyDataを挿入する位置を決定する
@@ -326,7 +326,7 @@
                 '降順
                 If (lngInsertType = TREE_LEAF) Then
                     'ファイルは、ディレクトリ先に表示
-                    If (lpListItems(i).ImageIndex <> ItemImage.File ) Then
+                    If (lpListItems(i).ImageIndex <> ItemImage.File) Then
                         lngInsertPos = i
                         Exit For
                     Else
@@ -391,8 +391,8 @@
         LongToString = Strings.Right(strPad.ToString() & strResult, lngDigit)
     End Function
 
-    Private Sub MakeDirTreeSub(ByVal lngBaseIndex As Long, ByVal strBaseDir As String, _
-        ByVal lngDepth As Integer, ByVal blnProcessSubDirectory As Boolean, _
+    Private Sub MakeDirTreeSub(ByVal lngBaseIndex As Long, ByVal strBaseDir As String,
+        ByVal lngDepth As Integer, ByVal blnProcessSubDirectory As Boolean,
         ByVal maxProgressDepth As Integer
     )
         '------------------------------------------------------------------------------
@@ -611,9 +611,9 @@
         End If
     End Sub
 
-    Private Sub OpenDirectoryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenDirectoryToolStripMenuItem.Click
+    Private Sub mnuFileOpenSelect_Click(sender As Object, e As EventArgs) Handles mnuFileOpenSelect.Click
         '------------------------------------------------------------------------------
-        'ディレクトリを開く
+        ' ディレクトリを選択して開く
         '------------------------------------------------------------------------------
         Dim strTemp As String
 
@@ -623,5 +623,4 @@
         mstrRootDirectory = strTemp
         UpdateExplorer(strTemp, True, True)
     End Sub
-
 End Class
