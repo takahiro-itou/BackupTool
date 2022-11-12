@@ -623,4 +623,28 @@
         mstrRootDirectory = strTemp
         UpdateExplorer(strTemp, True, True)
     End Sub
+
+    Private Sub mnuOpenAnime_Click(sender As Object, e As EventArgs) Handles mnuOpenAnime.Click
+        '------------------------------------------------------------------------------
+        ' 特定のディレクトリを開く
+        '------------------------------------------------------------------------------
+        Dim strTemp As String
+
+        strTemp = "F:"
+
+        mstrRootDirectory = strTemp
+        UpdateExplorer(strTemp, True, True)
+    End Sub
+
+    Private Sub mnuOpenRecord_Click(sender As Object, e As EventArgs) Handles mnuOpenRecord.Click
+        '------------------------------------------------------------------------------
+        ' 特定のディレクトリを開く
+        '------------------------------------------------------------------------------
+        Dim strTemp As String
+
+        strTemp = "L:"
+
+        mstrRootDirectory = strTemp
+        UpdateExplorer(strTemp, True, True)
+    End Sub
 End Class
