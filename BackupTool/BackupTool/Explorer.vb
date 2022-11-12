@@ -116,6 +116,7 @@ Public Class Explorer
 
         With objfDir
             .Description = "Select Folder"
+            .RootFolder = Environment.SpecialFolder.MyComputer
             .ShowNewFolderButton = False
 
             If .ShowDialog(Me) = DialogResult.OK Then
