@@ -1,4 +1,6 @@
-﻿Public Class Explorer
+﻿Imports System.ComponentModel
+
+Public Class Explorer
 
     'リストビュー
     Const NAME_COLUMN As Long = 0
@@ -108,20 +110,22 @@
         '------------------------------------------------------------------------------
         'ディレクトリを選択する
         '------------------------------------------------------------------------------
-        Dim objfDir As Directory
+        Dim objfDir As System.Windows.Forms.FolderBrowserDialog
 
-        'objfDir = New Directory
+        objfDir = New System.Windows.Forms.FolderBrowserDialog()
 
-        'With objfDir
-        ' .SelectedDirectory = strInitDir
-        ' .Show vbModal
-        '
-        'SelectDirectory = .SelectedDirectory
-        'End With
+        With objfDir
+            .Description = "Select Folder"
+            .ShowNewFolderButton = False
 
-        'Unload objfDir
+            If .ShowDialog(Me) = DialogResult.OK Then
+                SelectDirectory = .SelectedPath
+            End If
+
+            .Dispose()
+        End With
+
         objfDir = Nothing
-        SelectDirectory = "F:"
     End Function
 
     Public Sub UpdateExplorer(ByVal strRootDir As String,
@@ -590,6 +594,10 @@
         End With
     End Sub
 
+    Private Sub Explorer_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        End
+    End Sub
+
     Private Sub trvDirectory_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles trvDirectory.AfterSelect
         '------------------------------------------------------------------------------
         'ツリービューコントロールのノードをクリックした場合は
@@ -647,4 +655,9 @@
         mstrRootDirectory = strTemp
         UpdateExplorer(strTemp, True, True)
     End Sub
+
+    Private Sub mnuFileExit_Click(sender As Object, e As EventArgs) Handles mnuFileExit.Click
+        End
+    End Sub
+
 End Class
