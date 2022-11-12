@@ -120,6 +120,8 @@ Public Class Explorer
 
             If .ShowDialog(Me) = DialogResult.OK Then
                 SelectDirectory = .SelectedPath
+            Else
+                SelectDirectory = ""
             End If
 
             .Dispose()
@@ -174,13 +176,13 @@ Public Class Explorer
         'SortKeyに0を指定すると、ソートしない
         '------------------------------------------------------------------------------
         Dim i As Long, j As Long, lngChildCount As Long
-        Dim lngInsertPos As Long, lngCmpResult As Long
+        Dim lngInsertPos As Long
         Dim lngFileField As Long, lngDirsField As Long
         Dim lngTimeField As Date
         Dim lngNodeType As Long
         Dim numWmvFile As Long, sizeWmvFile As Long
         Dim numMpgFile As Long, sizeMpgFile As Long
-        Dim strEntry As String, strTemp As String
+        Dim strEntry As String
         Dim strNodeData As String, strSizeText As String
         Dim objListItem As ListViewItem
         Dim objItems As ListView.ListViewItemCollection
@@ -256,6 +258,8 @@ Public Class Explorer
                         .Add(LongToString(numWmvFile, 0, " "))
                         .Add(LongToString(numMpgFile, 0, " "))
                     End With
+                Else
+                    Continue For
                 End If
                 objListItem.SubItems.Add(lngTimeField)
                 objItems.Add(objListItem)
@@ -556,7 +560,7 @@ Public Class Explorer
         '------------------------------------------------------------------------------
         Dim i As Long, j As Long, C As Long
         Dim strBaseKey As String, strKey As String
-        Dim strDirName As String, strNodeData As String
+        Dim strNodeData As String
         Dim trvNodeNew As TreeNode
 
         'ベースディレクトリのキーを取得する
