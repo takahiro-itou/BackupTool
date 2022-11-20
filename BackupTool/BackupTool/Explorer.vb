@@ -424,10 +424,13 @@ Public Class Explorer
         strDir = Dir$(strCurDir, vbReadOnly Or vbHidden Or vbSystem Or vbDirectory)
 
         Do While strDir <> ""
+            Application.DoEvents()
             '現在のディレクトリと親ディレクトリは除く
             If ((strDir <> ".") And (strDir <> "..")) Then
                 '対象外に設定されていないことを確認する
-                If (True) Then
+                If (Len(strCurDir) + Len(strDir) >= 247) Then
+                    ' パスが長すぎるのでスキップする
+                ElseIf (True) Then
                     '属性を確認する
                     If (GetAttr(strCurDir & strDir) And vbDirectory) Then
                         i = mobjDirectoryTree.AddChildNode(lngBaseIndex, TREE_NODE, strDir, True)
