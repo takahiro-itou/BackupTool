@@ -533,6 +533,12 @@ Public Class Explorer
                         numMpgFile = numMpgFile + 1
                         sizeMpgFile = sizeMpgFile + lngSize
                     End If
+                    If strNameLower.EndsWith(".ts") Then
+                        .NodesMpgFileField(lngChildIndex) = 1
+                        .NodesMpgSizeField(lngChildIndex) = lngSize
+                        numMpgFile = numMpgFile + 1
+                        sizeMpgFile = sizeMpgFile + lngSize
+                    End If
 
                     lngFileCount = lngFileCount + 1
                     objTotalSize.AddInteger(lngSize)
